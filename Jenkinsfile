@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'
         VCENTER_CREDENTIALS_ID = 'roseaw-vsphere-creds' // VMware vSphere credentials ID
-        POWERCLI_IMAGE = 'roseaw/powerCLIimage' // Use your actual Docker image name
+        POWERCLI_IMAGE = 'roseaw/powercliimage' // Use your actual Docker image name
         IMAGE_TAG = 'latest' // Specify the image tag you want to use
     }
 
