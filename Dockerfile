@@ -14,5 +14,4 @@ RUN apt-get update \
 # Install VMware PowerCLI directly from PowerShell Gallery
 RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -AllowClobber"
 
-# Optionally, switch back to a non-root user if needed
-USER pwshuser
+
