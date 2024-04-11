@@ -11,12 +11,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Download and install PowerCLI
-RUN wget -q -O /tmp/VMware-PowerCLI.tar.gz https://www.powershellgallery.com/api/v2/package/VMware.PowerCLI \
-    && mkdir -p /usr/src/powercli \
-    && tar -xzf /tmp/VMware-PowerCLI.tar.gz -C /usr/src/powercli \
-    && pwsh -c "Set-Location /usr/src/powercli; & ./Initialize-PowerCLIEnvironment.ps1 -SetUserScope -Confirm:$false" \
-    && rm -f /tmp/VMware-PowerCLI.tar.gz
+# Install VMware PowerCLI directly from PowerShell Gallery
+RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -AllowClobber"
 
-# Switch back to non-root user
+# Optionally, switch back to a non-root user if needed
 USER pwshuser
