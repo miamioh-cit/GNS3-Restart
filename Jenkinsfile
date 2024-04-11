@@ -42,8 +42,9 @@ pipeline {
                 }
             }
         }
-        post {
+    }
 
+    post {
         success {
             slackSend color: "good", message: "Build Completed: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
         }
@@ -54,7 +55,6 @@ pipeline {
             
         failure {
             slackSend color: "danger", message: "Build Completed: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
-          }
-       }
+        }
     }
 }
