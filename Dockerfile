@@ -7,8 +7,8 @@ RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -Confir
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy your PowerShell script into the container
+# Copy the Restart-VMs.ps1 script into the container
 COPY Restart-VMs.ps1 .
 
-# By default, run the PowerShell script
-CMD ["pwsh", "-File", "./Restart-VMs.ps1"]
+# By default, start a PowerShell prompt
+CMD ["pwsh"]
