@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/powershell:latest
 
 # Install VMware PowerCLI
-RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -Confirm:$false -AllowClobber"
+RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -AllowClobber:$true"
 
 
 # Set the working directory
