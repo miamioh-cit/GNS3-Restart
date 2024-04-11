@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'
-        POWERCLI_IMAGE = 'roseaw/powerCLIimage' // Replace with your Docker image
-        IMAGE_TAG = 'latest' // Or specify a particular version/tag
+        POWERCLI_IMAGE = 'roseaw/powerCLIimage' // Use your actual Docker image name
+        IMAGE_TAG = 'latest' // Specify the image tag you want to use
     }
 
     stages {
@@ -21,7 +21,7 @@ pipeline {
 
                     // Run the Docker container to execute the PowerCLI script
                     sh """
-                    docker run --rm -v /path/to/your/scripts:/scripts ${env.POWERCLI_IMAGE}:${env.IMAGE_TAG} pwsh -File /scripts/YourScriptName.ps1 -VmList '$vmList'
+                    docker run --rm ${env.POWERCLI_IMAGE}:${env.IMAGE_TAG} pwsh -File /usr/src/app/Restart-VMs.ps1 -VmList '$vmList'
                     """
 
                     // Logout from Docker Hub
