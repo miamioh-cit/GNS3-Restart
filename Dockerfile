@@ -14,4 +14,5 @@ RUN apt-get update \
 # Install VMware PowerCLI directly from PowerShell Gallery
 RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -AllowClobber"
 
-
+# Copy the PowerShell script file into the Docker image
+COPY Restart-VMs.ps1 /usr/src/app/
