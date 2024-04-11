@@ -2,7 +2,8 @@
 FROM mcr.microsoft.com/powershell:latest
 
 # Install VMware PowerCLI
-RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -Confirm:$false"
+RUN pwsh -c "Install-Module -Name VMware.PowerCLI -Scope AllUsers -Force -Confirm:$false -AllowClobber"
+
 
 # Set the working directory
 WORKDIR /usr/src/app
