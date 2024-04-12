@@ -10,10 +10,10 @@ $vmList = @(
     "284-11", "284-12", "284-13", "284-14", "284-15", "284-16", "284-17", "386-00", "386-01", "358-01"
 )
 
-# Connect to the vCenter Server using credentials passed as parameters
+# Connect to the vCenter Server using the provided credentials
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
-# Loop through each VM name and restart the VM
+# Loop through each VM name and restart the VM if found
 foreach ($vmName in $vmList) {
     $vm = Get-VM -Name $vmName
     if ($vm -ne $null) {
@@ -24,5 +24,5 @@ foreach ($vmName in $vmList) {
     }
 }
 
-# Disconnect from the vCenter Server
+# Disconnect from the vCenter Server after operations
 Disconnect-VIServer -Server $vCenterServer -Confirm:$false
