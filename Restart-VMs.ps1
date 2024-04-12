@@ -1,5 +1,7 @@
 param(
-    [string]$vCenterServer
+    [string]$vCenterServer,
+    [string]$vCenterUser,
+    [string]$vCenterPass
 )
 
 # List of VMs to restart
@@ -8,12 +10,7 @@ $vmList = @(
     "284-11", "284-12", "284-13", "284-14", "284-15", "284-16", "284-17", "386-00", "386-01", "358-01"
 )
 
-# Retrieve vSphere credentials from Jenkins
-$credential = Get-Credential -UserName '$env:VCENTER_USER' -Message "taylorw8-vsphere"
-$vCenterUser = $credential.UserName
-$vCenterPass = $credential.GetNetworkCredential().Password
-
-# Connect to the vCenter Server
+# Connect to the vCenter Server using credentials passed as parameters
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass
 
 # Loop through each VM name and restart the VM
