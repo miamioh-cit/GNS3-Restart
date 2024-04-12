@@ -42,7 +42,7 @@ pipeline {
                             -e VCENTER_USER_ENV=\$VCENTER_USER \
                             -e VCENTER_PASS_ENV=\$VCENTER_PASS \
                             ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG} \
-                            pwsh -File /usr/src/app/Restart-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser \$VCENTER_USER_ENV -vCenterPass \$VCENTER_PASS_ENV
+                            pwsh -File /usr/src/app/Restart-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser \$env:VCENTER_USER_ENV -vCenterPass \$env:VCENTER_PASS_ENV
                         """
                     }
                 }
