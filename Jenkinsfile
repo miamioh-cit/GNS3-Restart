@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'roseaw/powercliimage'
         DOCKER_IMAGE_TAG = 'latest'
-        VCENTER_CREDENTIALS_ID = 'roseaw-vsphere-creds'
+        VCENTER_CREDENTIALS_ID = 'taylorw8-vsphere'
     }
 
     stages {
