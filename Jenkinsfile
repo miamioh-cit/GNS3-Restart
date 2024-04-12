@@ -36,13 +36,13 @@ pipeline {
                 script {
                     // Retrieve vSphere credentials from Jenkins
                     withCredentials([usernamePassword(credentialsId: env.VCENTER_CREDENTIALS_ID, usernameVariable: 'VCENTER_USER', passwordVariable: 'VCENTER_PASS')]) {
-                        // Run the Docker container to execute the PowerCLI script, passing credentials
+                        // Set environment variables and run the Docker container to execute the PowerCLI script
                         sh """
                         docker run --rm \
-                            -e VCENTER_USER='$VCENTER_USER' \
-                            -e VCENTER_PASS='$VCENTER_PASS' \
+                            -e VCENTER_USER_ENV=\$VCENTER_USER \
+                            -e VCENTER_PASS_ENV=\$VCENTER_PASS \
                             ${env.DOCKER_IMAGE_NAME}:${env.DOCKER_IMAGE_TAG} \
-                            pwsh -File /usr/src/app/Restart-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser '$VCENTER_USER' -vCenterPass '$VCENTER_PASS'
+                            pwsh -File /usr/src/app/Restart-VMs.ps1 -vCenterServer 'vcenter.regional.miamioh.edu' -vCenterUser \$VCENTER_USER_ENV -vCenterPass \$VCENTER_PASS_ENV
                         """
                     }
                 }
@@ -65,3 +65,4 @@ pipeline {
         }
     }
 }
+
