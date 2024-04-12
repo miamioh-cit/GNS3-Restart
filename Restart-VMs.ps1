@@ -9,7 +9,7 @@ $vmList = @(
 )
 
 # Retrieve vSphere credentials from Jenkins
-$credential = Get-Credential -UserName '$env:VCENTER_USER' -Message "roseaw-vsphere-creds"
+$credential = Get-Credential -UserName '$env:VCENTER_USER' -Message "taylorw8-vsphere"
 $vCenterUser = $credential.UserName
 $vCenterPass = $credential.GetNetworkCredential().Password
 
