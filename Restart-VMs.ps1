@@ -4,6 +4,9 @@ param(
     [string]$vCenterPass
 )
 
+# Ignore invalid or self-signed SSL certificates
+Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
+
 # List of VMs to restart
 $vmList = @(
     "284-01", "284-02", "284-03", "284-04", "284-05", "284-06", "284-07", "284-08", "284-09", "284-10",
