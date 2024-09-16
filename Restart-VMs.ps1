@@ -14,9 +14,10 @@ Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPas
 $vmList = @(
     "284-01", "284-02", "284-03", "284-04", "284-05", "284-06", "284-07", "284-08", "284-09", "284-10",
     "284-11", "284-12", "284-13", "284-14", "284-15", "284-16", "284-17", "386-00", "386-01", "358-01",
-    "babbam2-225", "brunsojc-225", "chengrl-225", "dayam-225", "flohreh-225", "gartnea-225", "grimesdl-225", 
-    "henderbl-225", "hendris3-225", "hunterds-225", "lehmanjb-225", "mccurdca-225", "mosinsmj-225", "nyamusjj-225",
-    "rain-225", "roseaw-225", "sandlizh-225", "singleb-225", "tanl4-225", "taylo271-225", "taylorw8-225", "walshnj-225", "wanes-225"
+    "281K-01", "281K-02", "281K-03", "281K-04", "281K-05",
+    "281-01", "281-02", "281-03", "281-04", "281-05", "281-06", "281-07", "281-08", "281-09", "281-10", 
+    "281-11", "281-12", "281-13", "281-14"
+
 )
 
 # Loop through each VM name and restart the VM if found
