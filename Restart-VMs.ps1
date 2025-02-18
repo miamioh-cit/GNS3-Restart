@@ -12,14 +12,12 @@ Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPas
 
 # List of VMs to restart
 $vmList = @(
-    "284-01", "284-02", "284-03", "284-04", "284-05", "284-06", "284-07", "284-08", "284-09", "284-10",
-    "284-11", "284-12", "284-13", "284-14", "284-15", "284-16", "284-17", "386-00", "386-01",
-    "358-01", "358-02", "358-03", "358-04", "358-05", "358-06", "358-07", "358-08", "358-09", "358-10",
-    "358-11", "358-12", "358-13", "358-14",
-    "281K-01", "281K-02", "281K-03", "281K-04", "281K-05",
-    "281-01", "281-02", "281-03", "281-04", "281-05", "281-06", "281-07", "281-08", "281-09", "281-10", 
-    "281-11", "281-12", "281-13", "281-14"
-
+    "25-alexanmf", "25-alir2", "25-almafrtk", "25-barillnt", "25-beimesca", "25-benzink", "25-blairc", "25-bosticdj", "25-bowman37", "25-brownc61",
+    "25-burkhejl", "25-careyjr", "25-clarkap2", "25-cryselka", "25-davenpr2", "25-diallof2", "25-ehlerjl", "25-eschenea", "25-fangmaj2", "25-ferrana", 
+    "25-fishe192", "25-gartnea", "25-guzmanma", "25-hertleac", "25-hibbarkm", "25-hoganec", "25-jonesm64", "25-khanalb", "25-leachh", "25-lieuhk", 
+    "25-mcclela", "25-mooreac5", "murrayt6", "25-nguyenjm", "25-nolen", "25-parsonjt", "25-perezi3", "25-rimalgp", "25-rodrig99", "25-roger142",
+    "25-samals", "25-sanwuya", "25-sapkotp", "25-smith624", "25-stidhalt", "25-thiekend", "25-vontrodl", "25-wattsts", "25-widenemg", "25-wilso682", 
+    "25-yharbrm", "25-hibbardkm"
 
 )
 
