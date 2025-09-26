@@ -18,44 +18,42 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Scop
 Connect-VIServer -Server $vCenterServer -User $vCenterUser -Password $vCenterPass | Out-Null
 
 try {
-    # --- DISCOVERY SECTION ---
+    # --- FIXED: path builder without Select-Object -Reverse ---
     function Get-FullPath {
         param([Parameter(Mandatory)]$Object)
         $names = @()
         $cur = $Object
         while ($null -ne $cur) {
-            if ($cur.PSObject.Properties.Match('Name')) { $names += $cur.Name }
-            if ($cur.PSObject.Properties.Match('Parent')) { $cur = $cur.Parent } else { break }
+            if ($cur.PSObject.Properties.Match('Name').Count -gt 0) { $names += $cur.Name }
+            if ($cur.PSObject.Properties.Match('Parent').Count -gt 0) { $cur = $cur.Parent } else { break }
         }
-        return ($names | Select-Object -Reverse) -join '/'
+        [array]::Reverse($names)
+        return ($names -join '/')
     }
 
     Write-Host "`n=== DISCOVERY MODE ===" -ForegroundColor Cyan
     Write-Host "Parent Folder: $ParentFolderName; Target Sub-Folders: $($TargetFolderNames -join ', ')" -ForegroundColor Cyan
 
-    # Grab the parent folder if it exists
+    # Try to grab the parent folder if it exists
     $parentFolder = Get-Folder -Name $ParentFolderName -ErrorAction SilentlyContinue
 
-    # Locate each target sub-folder (or ResourcePool/vApp)
+    # Locate each target (Folder/ResourcePool/vApp)
     $targetContainers = @()
     foreach ($name in $TargetFolderNames) {
-        # Try as folder under parent first
+        # Folder under parent
         if ($parentFolder) {
             $f = Get-Folder -Name $name -Location $parentFolder -ErrorAction SilentlyContinue
-            if ($f) {
-                $targetContainers += $f
-                continue
-            }
+            if ($f) { $targetContainers += $f; continue }
         }
-        # Try as folder anywhere
+        # Folder anywhere
         $f2 = Get-Folder -Type VM -Name $name -ErrorAction SilentlyContinue
         if ($f2) { $targetContainers += $f2; continue }
 
-        # Try ResourcePool
+        # Resource pool
         $rp = Get-ResourcePool -Name $name -ErrorAction SilentlyContinue
         if ($rp) { $targetContainers += $rp; continue }
 
-        # Try vApp
+        # vApp
         $va = Get-VApp -Name $name -ErrorAction SilentlyContinue
         if ($va) { $targetContainers += $va; continue }
 
@@ -83,6 +81,5 @@ try {
     }
 }
 finally {
-    # Disconnect from the vCenter Server after operations
     Disconnect-VIServer -Server $vCenterServer -Confirm:$false | Out-Null
 }
