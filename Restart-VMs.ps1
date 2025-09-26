@@ -74,18 +74,13 @@ try {
     return
   }
 
-  Write-Host "Restarting $($poweredOn.Count) VM(s) from approved folders..." -ForegroundColor Green
+  Write-Host "Hard-rebooting $($poweredOn.Count) VM(s) from approved folders..." -ForegroundColor Green
   foreach ($vm in $poweredOn) {
     try {
-      Write-Host "Guest restart: $($vm.Name)"
-      Restart-VMGuest -VM $vm -Confirm:$false -ErrorAction Stop
+      Write-Host "Hard reboot (Restart-VM) for: $($vm.Name)"
+      Restart-VM -VM $vm -Confirm:$false -ErrorAction Stop
     } catch {
-      Write-Warning "Guest restart failed for '$($vm.Name)' (VMware Tools?). Power-cycling..."
-      try {
-        Restart-VM -VM $vm -Confirm:$false -ErrorAction Stop
-      } catch {
-        Write-Error "Failed to restart '$($vm.Name)'. Error: $_"
-      }
+      Write-Error "Failed to hard reboot '$($vm.Name)'. Error: $_"
     }
   }
 
@@ -94,3 +89,4 @@ try {
 finally {
   Disconnect-VIServer -Server $vCenterServer -Confirm:$false | Out-Null
 }
+
